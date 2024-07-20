@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf Reader</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PDF Reader - View and Manage Your PDF Files Online</title>
+    <meta name="description" content="PDF Reader is an online tool to view, manage, and download PDF files. Access your documents anytime and anywhere with our powerful PDF reader.">
+    <meta name="keywords" content="PDF reader, online PDF viewer, PDF management, view PDF files, manage PDFs, PDF download">
+    <meta name="author" content="Vizir Labs">
+    <meta property="og:title" content="PDF Reader - View and Manage Your PDF Files Online">
+    <meta property="og:description" content="PDF Reader is an online tool to view, manage, and download PDF files. Access your documents anytime and anywhere with our powerful PDF reader.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/normalize.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-      <div class="navbar">
-            <div class="navbarLogo">
-                <img src="./assets/img/navbar-logo.png" alt="navbar-logo">
-            </div>
-      </div>
     <div class="container">
+        <div class="navbar">
+              <div class="navbar__logo">
+                  <img src="./assets/img/navbar-logo.png" alt="navbar-logo">
+              </div>
+        </div>
         <div class="containerItem">
             <div class="header">
                 <button id="openModalBtn">
                     <img src="./pdf_reader_icon/index-icon.svg" width="30" height="30"></img>    
                 </button>
                 <div class="titleBar">
-                    <p>Title Of Publication</p>
+                    <h1>Title Of Publication</h1>
                     <div class="insideTitleBar">
                             <p>Issue: 42</p>
                             <p>April 22</p>
@@ -32,54 +39,52 @@
 
             <div class="content">
                 <div class="left-column">
-                    <div class="boxTop scrollable-content" id="content">
-                        <h1>Heading1</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus et unde nam inventore repellat id vitae quisquam ad consequuntur beatae at praesentium quod suscipit, tempora deleniti, excepturi dolorem quos magni?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro neque perspiciatis eveniet, delectus vitae unde rerum obcaecati aut dolores qui maxime consequatur molestias iusto deserunt perferendis dignissimos ut in beatae.</p>
-                        <img src="./assets/img/Rectangle-Img.png" alt="Image" class="image">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi libero nisi, omnis consequuntur dignissimos veniam amet adipisci, cupiditate cum eius odit asperiores, unde placeat expedita voluptatem quod natus laudantium nesciunt?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi libero nisi, omnis consequuntur dignissimos veniam amet adipisci, cupiditate cum eius odit asperiores, unde placeat expedita voluptatem quod natus laudantium nesciunt?</p>
+                    <div class="content-container">
+                        <div class="boxTop scrollable-content" id="content">
+                            <canvas id="pdf-canvas"></canvas>
+                        </div>
                     </div>
                     <div class="actions">
                         <div class="buttonSec1">
                             <div class="fullViewButton">
-                                <button id="fullView">
+                                <button class="fullView btnAc">
                                     <img src="./pdf_reader_icon/full-view-icon.svg" alt="Full view button">
                                 </button>
-                                <button id="fullWidthButton">
+                                <button class="fullWidthButton btnAc">
                                     <img src="./pdf_reader_icon/full-width-view-icon.svg" alt="Full width view button">
                                 </button>
                             </div>
                             <div class="maximizeButton">
                                 <span>100%</span>
-                                <button onclick="zoomOut()">-</button>
-                                <button onclick="zoomIn()">+</button>
+                                <button class="zoomOut btnAc">-</button>
+                                <button class="zoomIn btnAc">+</button>
                             </div>
                         </div>
                         <div class="buttonSec2">
-                            <button>
+                            <button id="prev-page" class="btnAc">
                                 <img src="./pdf_reader_icon/arrow-left-icon.svg" alt="Arrow-Left-Icon">
                             </button>
-                            <input type="number" value="2">
-                            <button>
+                            <input type="number" id="page-num" min="1" value="1">
+                            <!-- <span id="page-count"></span> -->
+                            <button id="next-page" class="btnAc">
                                 <img src="./pdf_reader_icon/arrow-right-icon.svg" alt="Arrow-left-Icon">
                             </button>
                         </div>
                         <div class="buttonSec3">
-                            <button id="download-btn">
+                            <button id="download-pdf" class="btnAc">
                                 <img src="./pdf_reader_icon/download-icon.svg" alt="Download-Icon">
                             </button>
-                            <button>
+                            <button id="print-pdf" class="btnAc">
                                 <img src="./pdf_reader_icon/print-icon.svg" alt="Print-Icon">
                             </button>
-                            <button> 
-                                <img src="./pdf_reader_icon/view-icon.svg" alt="View-Icon">
+                            <button id="maximize-button" class="btnAc"> 
+                                <img src="./pdf_reader_icon/view-icon.svg" alt="Maximize-icon">
                             </button>
                         </div>
                     </div>
                     <!-- The Modal -->
                     <div id="myModal" class="modal">
-                        <div class="modal-content">
+                        <div class="modal__content">
                             <span class="close">&times;</span>
                             <h2>Index</h2>
                             <div class="modalIndex">
@@ -148,77 +153,11 @@
                     </div>
                 </div>
                 <div id="right-column" class="right-column scrollable-metadata">
-                    <div class="card">
-                        <div class="webCard">
-                            <div class="web">
-                                <img src="./pdf_reader_icon/globe-icon.svg" alt="globe icon">
-                                <p>http://www.loremitsum.com</p>
-                                <img src="./pdf_reader_icon/open-link-icon.svg" alt="open link icon">
-                            </div>
-                            <div class="web">
-                                <img src="./pdf_reader_icon/globe-icon.svg" alt="globe icon">
-                                <p>http://www.loremitsum.com</p>
-                                <img src="./pdf_reader_icon/open-link-icon.svg" alt="open link icon">
-                            </div>
-                        </div>
-                        <div class="titleOfCard">
-                            <div class="titleCard">
-                                <img src="./pdf_reader_icon/alert-icon.svg" alt="alert icon">
-                                <h2>Title of the card</h2>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis nisl cursus bibendum sit nulla accumsan sodales ornare. At urna viverra non suspendisse neque, lorem. Pretium condimentum pellentesque gravida id etiam sit sed arcu euismod.</p>
-                        </div>
-                        <div class="cover">
-                            <div class="imgCover">
-                                <div class="web">
-                                    <img src="./pdf_reader_icon/file-icon.svg" alt="file icon">
-                                    <p>thumbnail_cover</p>
-                                    <img src="./pdf_reader_icon/download-icon.svg" alt="download-icon">
-                                </div>
-                                <div class="web">
-                                    <img src="./pdf_reader_icon/file-icon.svg" alt="file icon">
-                                    <p>thumbnail_cover</p>
-                                    <img src="./pdf_reader_icon/download-icon.svg" alt="download-icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="coverAudio">
-                            <p>audio_cover.mp3</p>
-                            <div class="audio-player">
-                                <audio controls>
-                                    <source src="./assets/audioVideo/Song1.pdf.mp3" type="audio/mpeg">
-                                </audio> 
-                            </div>
-                        </div>
-                        <div class="coverAudio">
-                            <p>audio_cover.mp3</p>
-                            <div class="audio-player">
-                                <audio controls>
-                                    <source src="./assets/audioVideo/Song1.pdf.mp3" type="audio/mpeg">
-                                </audio>
-                            </div>
-                        </div>
-                        <div class="coverAudio">
-                            <p>video_cover.mp4</p>
-                            <div class="video-player">
-                                <video controls>
-                                    <source type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                        <div class="coverAudio">
-                            <p>video_cover.mp4</p>
-                            <div class="video-player">
-                                <video controls>
-                                    <source type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script defer src="js/script.js"></script>
 </body>
 </html>
