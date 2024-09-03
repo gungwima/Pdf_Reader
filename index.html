@@ -16,148 +16,102 @@
 </head>
 <body>
     <div class="container">
-        <div class="navbar">
-              <div class="navbar__logo">
-                  <img src="./assets/img/navbar-logo.png" alt="navbar-logo">
-              </div>
-        </div>
-        <div class="containerItem">
-            <div class="header">
-                <button id="openModalBtn">
-                    <img src="./pdf_reader_icon/index-icon.svg" width="30" height="30"></img>    
-                </button>
-                <div class="titleBar">
-                    <h1>Title Of Publication</h1>
-                    <div class="insideTitleBar">
-                            <p>Issue: 42</p>
-                            <p>April 22</p>
+        <div class="navbarWrapper">
+            <div class="navbar">
+                <div class="navbarLogo">
+                    <img src="./assets/img/navbar-logo.png" alt="navbar-logo">
+                </div>
+                <div class="titleNavbar">
+                    <div class="titleBar">
+                        <h1 class="titleContent">Title Of Publication</h1>
+                        <div class="insideTitleBar">
+                            <p class="issue"></p>
+                            <p class="publicationDate"></p>
+                        </div>
                     </div>
                 </div>
-                <input type="checkbox" id="check" checked>
-                <label for="check" class="toggle-button"></label>
+                <div class="buttonNavbar">
+                        <button class="openModalBtn jsOpenModalBtn">
+                            <img src="./pdf_reader_icon/index-icon.svg" width="30" height="30"></img>    
+                        </button>
+                        <button class="check jsCheck">
+                            <img src="./pdf_reader_icon/view-icon-1.svg" width="30" height="30" alt="">
+                        </button>
+                </div>
             </div>
-
+        </div>
+        <div class="containerItem">
             <div class="content">
-                <div class="left-column">
-                    <div class="content-container">
-                        <div class="boxTop scrollable-content" id="content">
-                            <canvas id="pdf-canvas"></canvas>
+                <div class="leftColumn jsLeftColumn">
+                    <div class="contentContainer jsContentContainer">
+                        <div class="loadingMessage jsLoadingMessage">
+                            <span class="loader"></span>
+                        </div>
+                        <div class="boxTop jsBoxTop scrollableContent jsContent">
+                            <canvas class="jsPdfCanvasPrevious"></canvas>
+                            <canvas class="jsPdfCanvasCurrent"></canvas>
+                            <div class="textLayerContainer"></div>
                         </div>
                     </div>
                     <div class="actions">
                         <div class="buttonSec1">
                             <div class="fullViewButton">
-                                <button class="fullView btnAc">
+                                <button class="jsFullView">
                                     <img src="./pdf_reader_icon/full-view-icon.svg" alt="Full view button">
                                 </button>
-                                <button class="fullWidthButton btnAc">
+                                <button class="fullWidthButton jsFullWidthButton">
                                     <img src="./pdf_reader_icon/full-width-view-icon.svg" alt="Full width view button">
                                 </button>
                             </div>
                             <div class="maximizeButton">
-                                <span>100%</span>
-                                <button class="zoomOut btnAc">-</button>
-                                <button class="zoomIn btnAc">+</button>
+                                <span class="jsZoomSpan">100%</span>
+                                <button class="jsZoomOut">-</button>
+                                <button class="jsZoomIn">+</button>
                             </div>
                         </div>
                         <div class="buttonSec2">
-                            <button id="prev-page" class="btnAc">
+                            <button class="prevPage jsPrevPage">
                                 <img src="./pdf_reader_icon/arrow-left-icon.svg" alt="Arrow-Left-Icon">
                             </button>
-                            <input type="number" id="page-num" min="1" value="1">
-                            <!-- <span id="page-count"></span> -->
-                            <button id="next-page" class="btnAc">
+                            <input type="number" class="pageNum jsPageNum" min="1" value="1">
+                            <button class="nextPage jsNextPage">
                                 <img src="./pdf_reader_icon/arrow-right-icon.svg" alt="Arrow-left-Icon">
                             </button>
                         </div>
                         <div class="buttonSec3">
-                            <button id="download-pdf" class="btnAc">
+                            <button class="downloadPdf jsDownloadPdf">
                                 <img src="./pdf_reader_icon/download-icon.svg" alt="Download-Icon">
                             </button>
-                            <button id="print-pdf" class="btnAc">
+                            <button class="printPdf jsPrintPdf">
                                 <img src="./pdf_reader_icon/print-icon.svg" alt="Print-Icon">
                             </button>
-                            <button id="maximize-button" class="btnAc"> 
+                            <button class="maximizeButton jsMaximizeButton"> 
                                 <img src="./pdf_reader_icon/view-icon.svg" alt="Maximize-icon">
                             </button>
                         </div>
                     </div>
                     <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                        <div class="modal__content">
+                    <div class="jsModal modal">
+                        <div class="modalContent jsModalContent">
                             <span class="close">&times;</span>
                             <h2>Index</h2>
-                            <div class="modalIndex">
-                                <div>
-                                    <a href="">Introduction</a>
-                                    <span>4</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 1</a>
-                                    <span>5</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 2</a>
-                                    <span>6</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 3</a>
-                                    <span>10</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 4</a>
-                                    <span>15</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 5</a>
-                                    <span>20</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 6</a>
-                                    <span>25</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 7</a>
-                                    <span>30</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 8</a>
-                                    <span>35</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 9</a>
-                                    <span>40</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 10</a>
-                                    <span>45</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 11</a>
-                                    <span>50</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 12</a>
-                                    <span>55</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 13</a>
-                                    <span>60</span>
-                                </div>
-                                <div>
-                                    <a href="">Chapter 14</a>
-                                    <span>65</span>
-                                </div>
+                            <div class="modalIndex jsModalIndex">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="right-column" class="right-column scrollable-metadata">
+                <div class="rightColumn scrollableMetadata jsRightColumn">
+                </div>
+            </div>
+            <div class="errorMessage hidden">
+                <div class="errorContent">
+                    <span class="errorText"></span>
+                    <button class="errorCloseBtn">Close</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
-    <script defer src="js/script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
